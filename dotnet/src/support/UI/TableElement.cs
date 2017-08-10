@@ -27,6 +27,7 @@ namespace OpenQA.Selenium.Support.UI
   /// </summary>
   public class TableElement
   {
+    private const string TagName = "table";
     private readonly IWebElement table;
 
     /// <summary>
@@ -71,10 +72,8 @@ namespace OpenQA.Selenium.Support.UI
 
     private static void CheckType(IWebElement webElement)
     {
-      if (!webElement.TagName.Equals("table"))
-      {
-        throw new NotTableElementException(webElement.TagName);
-      }
+      if (!webElement.TagName.Equals(TagName))
+        throw new UnexpectedTagNameException(TagName, webElement.TagName);
     }
 
     private static IList<TableRowElement> TheRows(IWebElement parentElement)
